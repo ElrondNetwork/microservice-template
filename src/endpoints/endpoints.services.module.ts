@@ -1,7 +1,6 @@
 import { Module } from "@nestjs/common";
 import { ExampleModule } from "./example/example.module";
 import { TestSocketModule } from "./test-sockets/test.socket.module";
-import { TokenModule } from "./tokens/token.module";
 import { UsersModule } from "./users/user.module";
 
 @Module({
@@ -9,10 +8,11 @@ import { UsersModule } from "./users/user.module";
     ExampleModule,
     TestSocketModule,
     UsersModule,
-    TokenModule,
   ],
   exports: [
-    ExampleModule, TestSocketModule, UsersModule, TokenModule,
+    ExampleModule,
+    TestSocketModule,
+    UsersModule,
   ],
 })
 export class EndpointsServicesModule { }

@@ -6,11 +6,15 @@ urls:
     - 'https://microservice.elrond.com'
   redis: '127.0.0.1'
 database:
+  type: 'mysql'
   host: 'localhost'
   port: 3306
   username: 'root'
   password: 'root'
   name: 'example'
+# database:
+#   type: 'mongodb'
+#   url: 'mongodb://root:password@localhost:27017'
 features:
   publicApi:
     enabled: true

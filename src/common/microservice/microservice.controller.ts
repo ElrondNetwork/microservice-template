@@ -4,7 +4,8 @@ import { CachingService } from "../caching/caching.service";
 
 @Controller()
 export class MicroserviceController {
-  private logger: Logger;
+  private readonly logger: Logger;
+
   constructor(
     private readonly cachingService: CachingService,
   ) {

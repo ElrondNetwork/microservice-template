@@ -13,7 +13,7 @@ export class PubSubController {
   }
 
   @EventPattern('onTest')
-  async onTest(payload: unknown) {
+  onTest(payload: unknown) {
     this.logger.log(`Notifying onTest with payload '${JSON.stringify(payload)}'`);
     this.eventsGateway.onTest(payload);
   }

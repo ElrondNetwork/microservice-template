@@ -11,7 +11,7 @@ export class TestSocketService {
     this.logger = new Logger(TestSocketService.name);
   }
 
-  async testSocket(): Promise<void> {
+  testSocket(): void {
     this.logger.log('emitting onTest event');
     this.clientProxy.emit('onTest', { test: 'test' });
   }

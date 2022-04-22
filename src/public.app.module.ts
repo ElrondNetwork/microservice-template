@@ -6,15 +6,13 @@ import { CommonModule } from './common/common.module';
 import { LoggingModule } from './common/logging/logging.module';
 import { EndpointsServicesModule } from './endpoints/endpoints.services.module';
 import { EndpointsControllersModule } from './endpoints/endpoints.controller';
-import { DatabaseModule } from './common/database/database.module';
-import { NoSQLDatabaseModule } from './common/database/nosql.module';
+import { PersistenceModule } from './common/persistence/persistence.module';
 
 @Module({
   imports: [
     LoggingModule,
     CommonModule,
-    DatabaseModule,
-    NoSQLDatabaseModule,
+    PersistenceModule.register(),
     EndpointsServicesModule,
     EndpointsControllersModule,
   ],

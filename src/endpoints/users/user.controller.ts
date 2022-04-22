@@ -1,26 +1,25 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { PersistenceService } from 'src/common/persistence/persistence.service';
 import { CreateUserDto } from './entities/dto/create.user.dto';
 import { User } from './entities/user.entity';
-import { UsersService } from './user.service';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly persistenceService: PersistenceService) { }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.create(createUserDto);
+    return this.persistenceService.createUser(createUserDto);
   }
 
   @Get()
   findAll(): Promise<User[]> {
-    return this.usersService.findAll();
+    return this.persistenceService.findAllUsers();
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<User> {
-    const user = await this.usersService.findOne(id);
-
+    const user = await this.persistenceService.findOneUser(id);
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
     }
@@ -30,6 +29,6 @@ export class UsersController {
 
   @Delete(':id')
   remove(@Param('id') id: string): Promise<void> {
-    return this.usersService.remove(id);
+    return this.persistenceService.deleteUser(id);
   }
 }

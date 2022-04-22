@@ -1,5 +1,5 @@
 export class ApiUtils {
-  static mergeObjects<T>(obj1: T, obj2: Record<string, unknown>) {
+  static mergeObjects<T>(obj1: T, obj2: any) {
     for (const key of Object.keys(obj2)) {
       if (key in obj1) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

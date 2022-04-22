@@ -7,6 +7,7 @@ export class MetricsService {
   private static externalCallsHistogram: Histogram<string>;
   private static pendingRequestsHistogram: Gauge<string>;
   private static apiResponseSizeHistogram: Histogram<string>;
+  private static persistenceDurationHistogram: Histogram<string>;
   private static lastProcessedNonceGauge: Gauge<string>;
   private static pendingApiHitGauge: Gauge<string>;
   private static cachedApiHitGauge: Gauge<string>;
@@ -44,6 +45,15 @@ export class MetricsService {
         name: 'api_response_size',
         help: 'API Response size',
         labelNames: ['endpoint'],
+        buckets: [],
+      });
+    }
+
+    if (!MetricsService.persistenceDurationHistogram) {
+      MetricsService.persistenceDurationHistogram = new Histogram({
+        name: 'persistence_duration',
+        help: 'Persistence Duration',
+        labelNames: ['action'],
         buckets: [],
       });
     }
@@ -95,7 +105,12 @@ export class MetricsService {
     MetricsService.cachedApiHitGauge.inc({ endpoint });
   }
 
+  setPersistenceDuration(action: string, duration: number) {
+    MetricsService.externalCallsHistogram.labels('persistence').observe(duration);
+    MetricsService.persistenceDurationHistogram.labels(action).observe(duration);
+  }
+
   async getMetrics(): Promise<string> {
-    return register.metrics();
+    return await register.metrics();
   }
 }

@@ -6,7 +6,7 @@ import { ApiConfigService } from 'src/common/api-config/api.config.service';
 @Module({
   imports: [
     BullModule.forRootAsync({
-      useFactory: async (apiConfigService: ApiConfigService) => ({
+      useFactory: (apiConfigService: ApiConfigService) => ({
         redis: {
           host: apiConfigService.getRedisUrl(),
           port: 6379,

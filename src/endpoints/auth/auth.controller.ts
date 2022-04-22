@@ -12,9 +12,9 @@ export class AuthController {
 		status: 200,
 		description: 'Authorizes the user and returns the encoded address',
 	})
-	async authorize(
+	authorize(
 		@Jwt('address') address: string
-	): Promise<string> {
+	): string {
 		return address;
 	}
 }

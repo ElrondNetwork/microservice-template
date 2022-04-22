@@ -7,9 +7,7 @@ export class JwtAdminGuard implements CanActivate {
     private readonly apiConfigService: ApiConfigService
   ) { }
 
-  async canActivate(
-    context: ExecutionContext,
-  ): Promise<boolean> {
+  canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
 
     const jwt = request.jwt;

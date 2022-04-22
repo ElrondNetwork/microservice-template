@@ -1,16 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty } from "@nestjs/swagger";
 
-@Entity('users')
 export class User {
-  @PrimaryGeneratedColumn()
-  id?: number;
+  @ApiProperty()
+  id: string = '';
 
-  @Column()
-  firstName?: string;
+  @ApiProperty()
+  firstName: string = '';
 
-  @Column()
-  lastName?: string;
+  @ApiProperty()
+  lastName: string = '';
 
-  @Column({ default: true })
-  isActive?: boolean;
+  @ApiProperty()
+  isActive: boolean = false;
 }

@@ -21,10 +21,11 @@ export class TransactionProcessorService {
 
   @Cron('*/1 * * * * *')
   async handleNewTransactions() {
-    Locker.lock('newTransactions', async () => {
+    await Locker.lock('newTransactions', async () => {
       await this.transactionProcessor.start({
         gatewayUrl: this.apiConfigService.getApiUrl(),
         maxLookBehind: this.apiConfigService.getTransactionProcessorMaxLookBehind(),
+        // eslint-disable-next-line require-await
         onTransactionsReceived: async (shardId, nonce, transactions, statistics) => {
           this.logger.log(`Received ${transactions.length} transactions on shard ${shardId} and nonce ${nonce}. Time left: ${statistics.secondsLeft}`);
         },
